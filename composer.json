@@ -1,0 +1,16 @@
+{
+    "name": "durianpay/dpay-php",
+    "description": "SDK that wraps and collections of Durianpay's APIs, written in php",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "7.4.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Durianpay\\": "src/"
+        }
+    }
+}
