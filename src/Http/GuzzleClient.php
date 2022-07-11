@@ -7,6 +7,7 @@ use GuzzleHttp\RequestOptions as GuzzleRequestOptions;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use Durianpay\Durianpay as Durianpay;
 use Durianpay\Config as Config;
+use Durianpay\Exceptions\RequestException as DpayRequestException;
 
 class GuzzleClient
 {
@@ -67,6 +68,18 @@ class GuzzleClient
         return $reqOptions;
     }
 
+    private function _handleError(array $errorBody, int $errorCode): void
+    {
+        [
+            'error' => $errorMessage,
+            'error_code' => $errorStateCode,
+            'errors' => $errorDesc
+        ] = $errorBody;
+
+        // var_dump($errorMessage, $errorCode);
+        throw new DpayRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
+    }
+
     public function request(string $uri, array $options)
     {
         $reqOptions = $this->_validateRequestOptions($options);
@@ -77,12 +90,11 @@ class GuzzleClient
             $response = $this->_httpClient->request($reqMethod, $reqUri, $reqOptions);
         } catch (GuzzleRequestException $err) {
             $errResponse = $err->getResponse();
-
             $errBody = json_decode($errResponse->getBody()->getContents(), true);
             $errCode = $errResponse->getStatusCode();
-            $errHeader = $errResponse->getHeaders();
+            $errHeaders = $errResponse->getHeaders();
 
-            var_dump($errResponse);
+            $this->_handleError($errBody, $errCode);
         }
 
         return [(string)$response->getBody(), $response->getStatusCode(), $response->getHeaders()];
