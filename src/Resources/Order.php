@@ -1,25 +1,23 @@
-<?php 
+<?php
 
 namespace Durianpay\Resources;
 
-class Order {
-    public static $resourceUri = 'orders';
+use \Durianpay\Http\ApiClient as ApiClient;
 
-    public static function createOrder(array $body) {
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendCustomRequest(self::$resourceUri, [
-            'method' => 'POST',
-            'body' => $body
-        ]);
-        // return [$resBody, $resCode];
-        return json_decode($resBody, true);
+class Order
+{
+    // For Create and Fetch APIs
+    use \Durianpay\Http\RequestPresets;
+
+    public static function getResourceUri()
+    {
+        return 'orders/';
     }
 
-    public static function fetchOrders(array $queryParams = [])
+    public static function fetchOne(string $id, array $queryParams = [])
     {
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendCustomRequest(self::$resourceUri, [
-            'method' => 'GET',
-            'queryParams' => $queryParams
-        ]);
+        $uri = self::getResourceUri() . $id;
+        [$resBody, $resCode, $resHeaders] = ApiClient::sendRequest('GET', $uri, ['queryParams' => $queryParams]);
         return json_decode($resBody, true);
     }
 }

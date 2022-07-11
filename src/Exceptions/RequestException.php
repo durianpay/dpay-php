@@ -12,7 +12,7 @@ class RequestException extends Exception
 
     public function __construct($message, $code = 0, $stateCode = '', $desc = [])
     {
-        // if (!$message) throw new $this('Unknown ' . get_class($this));
+        if (!$message) throw new $this('Unknown ' . __CLASS__);
         $this->stateCode = $stateCode;
         $this->desc = $desc;
         parent::__construct($message, $code, null);
@@ -30,6 +30,7 @@ class RequestException extends Exception
 
     public function getDetailedErrorDesc(): array
     {
+        if (!$this->desc) return ['Unknown details'];
         return $this->desc;
     }
 }

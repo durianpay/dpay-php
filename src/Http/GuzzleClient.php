@@ -73,18 +73,21 @@ class GuzzleClient
         [
             'error' => $errorMessage,
             'error_code' => $errorStateCode,
-            'errors' => $errorDesc
         ] = $errorBody;
 
-        // var_dump($errorMessage, $errorCode);
+        $errorDesc = [];
+        if (array_key_exists('errors', $errorBody)) {
+            $errorDesc = $errorBody['errors'];
+        }
+
         throw new DpayRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
     }
 
-    public function request(string $uri, array $options)
+    public function request(string $method, string $uri, array $options)
     {
         $reqOptions = $this->_validateRequestOptions($options);
         $reqUri = $this->_getCompleteUri($uri, $options);
-        $reqMethod = strtoupper($options['method']);
+        $reqMethod = strtoupper($method);
 
         try {
             $response = $this->_httpClient->request($reqMethod, $reqUri, $reqOptions);
