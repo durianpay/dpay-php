@@ -7,17 +7,25 @@ use \Durianpay\Http\ApiClient as ApiClient;
 class Order
 {
     // For Create and Fetch APIs
-    use \Durianpay\Http\RequestPresets;
+    use \Durianpay\Http\PresetOperations\Create;
+    use \Durianpay\Http\PresetOperations\Fetch;
+    use \Durianpay\Http\PresetOperations\FetchOne;
 
     public static function getResourceUri()
     {
-        return 'orders/';
+        return 'orders';
     }
 
-    public static function fetchOne(string $id, array $queryParams = [])
+    public static function getRequiredOptions()
     {
-        $uri = self::getResourceUri() . $id;
-        [$resBody, $resCode, $resHeaders] = ApiClient::sendRequest('GET', $uri, ['queryParams' => $queryParams]);
-        return json_decode($resBody, true);
+        return [
+            'body' => [
+            'amount',
+            'currency',
+            'customer' => [
+                'given_name',
+                'email'
+            ]
+        ]];
     }
 }

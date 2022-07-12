@@ -32,11 +32,13 @@ class GuzzleClient
         return self::$_instance;
     }
 
-    private function _getCompleteUri(string $uri, array $options): string | array
-    {
-        if (array_key_exists('pathParams', $options) && count($options['pathParams']) > 0) return [$uri, $options['pathParams']];
-        return $uri;
-    }
+    // private function _getCompleteUri(string $uri, array $options): string | array
+    // {
+    //     if (array_key_exists('pathParams', $options) && count($options['pathParams']) > 0) {
+    //         return "";
+    //     }
+    //     return $uri;
+    // }
 
     private function _setDefaultHeaders(array $options): array
     {
@@ -48,7 +50,7 @@ class GuzzleClient
         return array_merge($options['headers'], $defaultHeaders);
     }
 
-    private function _validateRequestOptions(array $options): array
+    private function _processRequestOptions(array $options): array
     {
         $reqAuth = Durianpay::getApiKey();
         $reqHeaders = $this->_setDefaultHeaders($options);
@@ -85,12 +87,12 @@ class GuzzleClient
 
     public function request(string $method, string $uri, array $options)
     {
-        $reqOptions = $this->_validateRequestOptions($options);
-        $reqUri = $this->_getCompleteUri($uri, $options);
+        $reqOptions = $this->_processRequestOptions($options);
+        // $reqUri = $this->_getCompleteUri($uri, $options);
         $reqMethod = strtoupper($method);
 
         try {
-            $response = $this->_httpClient->request($reqMethod, $reqUri, $reqOptions);
+            $response = $this->_httpClient->request($reqMethod, $uri, $reqOptions);
         } catch (GuzzleRequestException $err) {
             $errResponse = $err->getResponse();
             $errBody = json_decode($errResponse->getBody()->getContents(), true);
