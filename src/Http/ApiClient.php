@@ -22,6 +22,16 @@ class ApiClient
                 throw new \InvalidArgumentException($message);
             }
         }
+        else if (array_key_exists('queryParams', $options) && array_key_exists('queryParams', $requiredOptions)) {
+            $qryParams = $options['queryParams'];
+            $reqQryParams = $requiredOptions['queryParams'];
+
+            $qryParamsDiff = array_diff_key(array_flip($reqQryParams), $qryParams);
+            if (count($qryParamsDiff) > 0) {
+                $message = "You must include required properties in your query parameters! Check https://durianpay.id/docs/api/ for detailed documentation.\n";
+                throw new \InvalidArgumentException($message);
+            }
+        }
     }
 
     private static function isRequestBodyValid($body, $reqBody)
