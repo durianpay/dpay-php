@@ -4,7 +4,7 @@ namespace Durianpay\Http\PresetOperations;
 
 trait Fetch
 {
-    public static function fetch(array $queryParams)
+    public static function fetch(array $queryParams = [])
     {
         $uri = static::getResourceUri();
         $options = ['queryParams' => $queryParams];

@@ -8,6 +8,7 @@ class ApiClient
 {
     public static function sendRequest($method, $uri, $options = [], $requiredOptions = []): array
     {
+        self::validateRequestOptions($options, $requiredOptions);
         return GuzzleClient::getInstance()->request($method, $uri, $options);
     }
 

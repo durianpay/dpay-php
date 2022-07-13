@@ -32,14 +32,6 @@ class GuzzleClient
         return self::$_instance;
     }
 
-    // private function _getCompleteUri(string $uri, array $options): string | array
-    // {
-    //     if (array_key_exists('pathParams', $options) && count($options['pathParams']) > 0) {
-    //         return "";
-    //     }
-    //     return $uri;
-    // }
-
     private function _setDefaultHeaders(array $options): array
     {
         $defaultHeaders = [
@@ -84,11 +76,10 @@ class GuzzleClient
 
         throw new DpayRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
     }
-
+    
     public function request(string $method, string $uri, array $options)
     {
         $reqOptions = $this->_processRequestOptions($options);
-        // $reqUri = $this->_getCompleteUri($uri, $options);
         $reqMethod = strtoupper($method);
 
         try {
