@@ -18,7 +18,7 @@ class ApiClient
             $body = $options['body'];
             $reqBody = $requiredOptions['body'];
 
-            if (!self::isRequestBodyValid($body, $reqBody)) {
+            if (!self::_isRequestBodyValid($body, $reqBody)) {
                 $message = "You must include required properties in your request body! Check https://durianpay.id/docs/api/ for detailed documentation.\n";
                 throw new \InvalidArgumentException($message);
             }
@@ -33,9 +33,19 @@ class ApiClient
                 throw new \InvalidArgumentException($message);
             }
         }
+        else if (array_key_exists('headers', $options) && array_key_exists('headers', $requiredOptions)) {
+            $headers = $options['headers'];
+            $reqHeaders = $requiredOptions['headers'];
+
+            $headersDiff = array_diff_key(array_flip($reqHeaders), $headers);
+            if (count($headersDiff) > 0) {
+                $message = "You must include required headers! Check https://durianpay.id/docs/api/ for detailed documentation.\n";
+                throw new \InvalidArgumentException($message);
+            }
+        }
     }
 
-    private static function isRequestBodyValid($body, $reqBody)
+    private static function _isRequestBodyValid($body, $reqBody)
     {
         foreach ($reqBody as $key => $value) {
             if (is_int($key)) {
@@ -48,13 +58,13 @@ class ApiClient
 
             // Check if there is subarray that needs to be validated
             if (is_array($value)) {
-                if (self::isRequestBodyValid($body[$key], $value) === false) return false;
+                if (self::_isRequestBodyValid($body[$key], $value) === false) return false;
             }
         }
         return true;
     }
 
-    private static function isNull($val)
+    private static function _isNull($val)
     {
         if ($val === null) return true;
         if (is_int($val)) return ($val === 0);
