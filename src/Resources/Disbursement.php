@@ -34,8 +34,12 @@ class Disbursement implements ResourceInterface
                         ]]
                     ],
                     'headers' => [
-                        'indempotency_key'
+                        'idempotency_key'
                     ]
+                ];
+            case 'validate':
+                return [
+                    'body' => ['account_number', 'bank_code']
                 ];
             default:
                 return [];
@@ -106,7 +110,7 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
-    public static function fetchDisbursementItems(string $id): array 
+    public static function fetchDisbursementItems(string $id): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/items';
         [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('GET', $uri);
