@@ -9,8 +9,6 @@ trait Create
         $uri = static::getResourceUri();
         $options = ['body' => $body];
 
-        \Durianpay\Http\ApiClient::validateRequestOptions($options, static::getRequiredOptions('create'));
-
         $res = \Durianpay\Http\GuzzleClient::getInstance()->request('POST', $uri, $options);
         return json_decode($res[0], true);
     }

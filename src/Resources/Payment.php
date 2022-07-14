@@ -100,7 +100,7 @@ class Payment implements ResourceInterface
             'verification_signature' => $verificationSignature
         ]];
 
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options, self::getRequiredOptions('verify'));
+        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options);
         return json_decode($resBody, true);
     }
 
@@ -120,7 +120,7 @@ class Payment implements ResourceInterface
         }
         $options = ['queryParams' => $queryParams];
 
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('GET', $uri, $options, self::getRequiredOptions('mdr-fees-calculation'));
+        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('GET', $uri, $options);
         return json_decode($resBody, true);
     }
 }

@@ -6,9 +6,8 @@ use Durianpay\Http\GuzzleClient as GuzzleClient;
 
 class ApiClient
 {
-    public static function sendRequest($method, $uri, $options = [], $requiredOptions = []): array
+    public static function sendRequest($method, $uri, $options = []): array
     {
-        self::validateRequestOptions($options, $requiredOptions);
         return GuzzleClient::getInstance()->request($method, $uri, $options);
     }
 
@@ -22,8 +21,7 @@ class ApiClient
                 $message = "You must include required properties in your request body! Check https://durianpay.id/docs/api/ for detailed documentation.\n";
                 throw new \InvalidArgumentException($message);
             }
-        }
-        else if (array_key_exists('queryParams', $options) && array_key_exists('queryParams', $requiredOptions)) {
+        } else if (array_key_exists('queryParams', $options) && array_key_exists('queryParams', $requiredOptions)) {
             $qryParams = $options['queryParams'];
             $reqQryParams = $requiredOptions['queryParams'];
 
@@ -32,8 +30,7 @@ class ApiClient
                 $message = "You must include required properties in your query parameters! Check https://durianpay.id/docs/api/ for detailed documentation.\n";
                 throw new \InvalidArgumentException($message);
             }
-        }
-        else if (array_key_exists('headers', $options) && array_key_exists('headers', $requiredOptions)) {
+        } else if (array_key_exists('headers', $options) && array_key_exists('headers', $requiredOptions)) {
             $headers = $options['headers'];
             $reqHeaders = $requiredOptions['headers'];
 

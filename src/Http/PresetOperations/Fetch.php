@@ -13,8 +13,6 @@ trait Fetch
         }
         $options = ['queryParams' => $queryParams];
 
-        \Durianpay\Http\ApiClient::validateRequestOptions($options, static::getRequiredOptions('fetch'));
-
         $res = \Durianpay\Http\GuzzleClient::getInstance()->request('GET', $uri, $options);
         return json_decode($res[0], true);
     }

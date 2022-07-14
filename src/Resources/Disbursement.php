@@ -58,7 +58,7 @@ class Disbursement implements ResourceInterface
         $uri = self::getResourceUri() . '/topup';
         $options = ['body' => $body];
 
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options, self::getRequiredOptions('topup'));
+        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options);
         return json_decode($resBody, true);
     }
 

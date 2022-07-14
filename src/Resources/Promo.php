@@ -45,7 +45,7 @@ class Promo implements ResourceInterface
         $uri = self::getResourceUri() . '/' . $id;
         $options = ['body' => $body];
 
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('PATCH', $uri, $options, self::getRequiredOptions('create'));
+        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('PATCH', $uri, $options);
         return json_decode($resBody, true);
     }
 }
