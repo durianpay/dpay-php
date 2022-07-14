@@ -8,9 +8,9 @@ trait Fetch
     {
         $uri = static::getResourceUri();
 
-        // if (!array_key_exists('limit', $queryParams)) {
-        //     $queryParams['limit'] = 1;
-        // }
+        if (!array_key_exists('limit', $queryParams)) {
+            $queryParams['limit'] = 5;
+        }
         $options = ['queryParams' => $queryParams];
 
         \Durianpay\Http\ApiClient::validateRequestOptions($options, static::getRequiredOptions('fetch'));
