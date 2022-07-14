@@ -7,6 +7,10 @@ trait Fetch
     public static function fetch(array $queryParams = [])
     {
         $uri = static::getResourceUri();
+
+        // if (!array_key_exists('limit', $queryParams)) {
+        //     $queryParams['limit'] = 1;
+        // }
         $options = ['queryParams' => $queryParams];
 
         \Durianpay\Http\ApiClient::validateRequestOptions($options, static::getRequiredOptions('fetch'));

@@ -46,9 +46,6 @@ class ApiClient
             // Check if the required property exists in request body
             if (!array_key_exists($key, $body)) return false;
 
-            // Check if the required property is not null in the request body
-            if (!is_array($value) && self::isNull($body[$key])) return false;
-
             // Check if there is subarray that needs to be validated
             if (is_array($value)) {
                 if (self::isRequestBodyValid($body[$key], $value) === false) return false;
