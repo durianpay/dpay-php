@@ -9,7 +9,7 @@ trait FetchOne
         $uri = static::getResourceUri() . '/' . $id;
         $options = ['queryParams' => $queryParams];
 
-        $res = \Durianpay\Http\GuzzleClient::getInstance()->request('GET', $uri, $options);
+        $res = \Durianpay\Http\GuzzleRequestor::getInstance()->request('GET', $uri, $options);
         return json_decode($res[0], true);
     }
 }

@@ -9,7 +9,7 @@ use Durianpay\Durianpay as Durianpay;
 use Durianpay\Config as Config;
 use Durianpay\Exceptions\RequestException as DpayRequestException;
 
-class GuzzleClient
+class GuzzleRequestor
 {
     private static $_instance;
     private $_httpClient;
@@ -35,7 +35,8 @@ class GuzzleClient
     private function _setDefaultHeaders(array $options): array
     {
         $defaultHeaders = [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
         ];
 
         if (!array_key_exists('headers', $options)) return $defaultHeaders;
@@ -88,7 +89,6 @@ class GuzzleClient
             $errResponse = $err->getResponse();
             $errBody = json_decode($errResponse->getBody()->getContents(), true);
             $errCode = $errResponse->getStatusCode();
-            $errHeaders = $errResponse->getHeaders();
 
             $this->_handleError($errBody, $errCode);
         }

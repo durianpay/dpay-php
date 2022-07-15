@@ -8,7 +8,7 @@ trait Delete
     {
         $uri = static::getResourceUri() . '/' . $id;
 
-        $res = \Durianpay\Http\GuzzleClient::getInstance()->request('DELETE', $uri, []);
+        $res = \Durianpay\Http\GuzzleRequestor::getInstance()->request('DELETE', $uri, []);
         return json_decode($res[0], true);
     }
 }

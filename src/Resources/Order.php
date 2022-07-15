@@ -55,7 +55,7 @@ class Order implements ResourceInterface
         $body['is_payment_link'] = true;
         $options = ['body' => $body];
 
-        $res = \Durianpay\Http\GuzzleClient::getInstance()->request('POST', $uri, $options);
+        $res = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options);
         return json_decode($res[0], true);
     }
 }

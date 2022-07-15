@@ -3,10 +3,10 @@
     "description": "SDK that wraps and collections of Durianpay's APIs, written in php",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": "^8.1",
-        "guzzlehttp/guzzle": "7.4.x-dev"
+        "guzzlehttp/guzzle": ">=6.0"
     },
     "autoload": {
         "psr-4": {
