@@ -5,12 +5,12 @@ namespace Durianpay\Exceptions;
 use Exception;
 use Throwable;
 
-class RequestException extends Exception
+class RequestException extends Exception implements Throwable
 {
     protected $stateCode;
     protected $desc;
 
-    public function __construct($message, $code = 0, $stateCode = '', $desc = [])
+    public function __construct(string $message, int $code = 0, string $stateCode = '', array $desc = [])
     {
         if (!$message) throw new $this('Unknown ' . __CLASS__);
         $this->stateCode = $stateCode;
