@@ -2,16 +2,34 @@
 
 namespace Durianpay\Resources;
 
+/**
+ * Disbursement Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/disbursements/fetch-banks/
+ */
 class Disbursement implements ResourceInterface
 {
     use \Durianpay\Http\PresetOperations\FetchOne;
     use \Durianpay\Http\PresetOperations\Delete;
 
+    /**
+     * Retrieve disbursement APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'disbursements';
     }
 
+    /**
+     * Retrieve required options for a specific disbursement API 
+     *
+     * @param  string $api
+     *
+     * @return array
+     */ 
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -46,6 +64,11 @@ class Disbursement implements ResourceInterface
         }
     }
 
+    /**
+     * Fetch a list of available banks to execute disbursement processes
+     *
+     * @return array
+     */
     public static function fetchAvailableBanks(): array
     {
         $uri = self::getResourceUri() . '/banks';
@@ -53,6 +76,13 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Top up Durianpay account balance
+     *
+     * @param  array $body
+     *
+     * @return array
+     */
     public static function topUp(array $body): array
     {
         $uri = self::getResourceUri() . '/topup';
@@ -62,6 +92,13 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Fetch details of a single top-up history
+     *
+     * @param  string $id
+     *
+     * @return array
+     */
     public static function fetchTopUpDetails(string $id): array
     {
         $uri = self::getResourceUri() . '/topup/' . $id;
@@ -69,6 +106,11 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Fetch the amount inside Durianpay's balance
+     *
+     * @return array
+     */
     public static function fetchBalance(): array
     {
         $uri = self::getResourceUri() . '/topup/balance';
@@ -76,6 +118,15 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Submit disbursement request
+     *
+     * @param  array  $body
+     * @param  array  $queryParams
+     * @param  string $idempotencyKey
+     *
+     * @return array
+     */
     public static function submit(array $body, array $queryParams = [], string $idempotencyKey = ''): array
     {
         $uri = self::getResourceUri() . '/submit';
@@ -92,6 +143,13 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Validate a single disbursement request
+     *
+     * @param  array $body
+     *
+     * @return array
+     */
     public static function validate(array $body): array
     {
         $uri = self::getResourceUri() . '/validate';
@@ -101,6 +159,14 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Approve a single disbursement request
+     *
+     * @param  string  $id
+     * @param  boolean $ignoreInvalid
+     *
+     * @return array
+     */
     public static function approve(string $id, bool $ignoreInvalid = true): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/approve';
@@ -110,6 +176,13 @@ class Disbursement implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Fetch a list of items from a single disbursement
+     *
+     * @param  string $id
+     *
+     * @return array
+     */
     public static function fetchDisbursementItems(string $id): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/items';

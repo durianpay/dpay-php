@@ -2,17 +2,35 @@
 
 namespace Durianpay\Resources;
 
+/**
+ * Subscription Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/subscriptions/overview/
+ */
 class Subscription implements ResourceInterface
 {
     use \Durianpay\Http\PresetOperations\Create;
     use \Durianpay\Http\PresetOperations\Fetch;
     use \Durianpay\Http\PresetOperations\FetchOne;
 
+    /**
+     * Retrieve subscription APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'subscriptions';
     }
 
+    /**
+     * Retrieve required options for a specific subscription API
+     *
+     * @param  string $api
+     *
+     * @return array
+     */
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -44,6 +62,13 @@ class Subscription implements ResourceInterface
         }
     }
 
+    /**
+     * Cancel a specific subscription
+     *
+     * @param  string $id
+     *
+     * @return array
+     */
     public statIc function cancel(string $id): array {
         $uri = self::getResourceUri() . '/' . $id . '/cancel';
         [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('DELETE', $uri);

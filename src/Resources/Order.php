@@ -4,6 +4,12 @@ namespace Durianpay\Resources;
 
 use \Durianpay\Resources\ResourceInterface as ResourceInterface;
 
+/**
+ * Order Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/orders/overview/
+ */
 class Order implements ResourceInterface
 {
     // For Create and Fetch APIs
@@ -11,11 +17,23 @@ class Order implements ResourceInterface
     use \Durianpay\Http\PresetOperations\Fetch;
     use \Durianpay\Http\PresetOperations\FetchOne;
 
+    /**
+     * Retrieve order APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'orders';
     }
 
+    /**
+     * Retrieve required options for a specific order API 
+     *
+     * @param  string $api
+     *
+     * @return array
+     */ 
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -49,6 +67,13 @@ class Order implements ResourceInterface
         }
     }
 
+    /**
+     * Create a payment link for a single order
+     *
+     * @param  array $body
+     *
+     * @return array
+     */
     public static function createPaymentLink(array $body): array 
     {
         $uri = static::getResourceUri();

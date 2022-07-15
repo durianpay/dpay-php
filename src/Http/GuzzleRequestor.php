@@ -9,11 +9,19 @@ use Durianpay\Durianpay as Durianpay;
 use Durianpay\Config as Config;
 use Durianpay\Exceptions\RequestException as DpayRequestException;
 
+/**
+ * GuzzleRequestor Class
+ * 
+ * @category Class
+ */
 class GuzzleRequestor
 {
     private static $_instance;
     private $_httpClient;
 
+    /**
+     * GuzzleRequestor class constructor
+     */
     private function __construct()
     {
         $this->_httpClient = new GuzzleClientObject(
@@ -24,6 +32,9 @@ class GuzzleRequestor
         );
     }
 
+    /**
+     * To create an instance of this class
+     */
     public static function getInstance()
     {
         if (is_null(self::$_instance)) {
@@ -32,6 +43,13 @@ class GuzzleRequestor
         return self::$_instance;
     }
 
+    /**
+     * Process headers object and set up default values for it
+     *
+     * @param  array $options
+     *
+     * @return array
+     */
     private function _setDefaultHeaders(array $options): array
     {
         $defaultHeaders = [
@@ -43,6 +61,13 @@ class GuzzleRequestor
         return array_merge($options['headers'], $defaultHeaders);
     }
 
+    /**
+     * To process options before being sent through Guzzle HTTP request
+     *
+     * @param  array $options
+     *
+     * @return array
+     */
     private function _processRequestOptions(array $options): array
     {
         $reqAuth = Durianpay::getApiKey();
@@ -63,6 +88,12 @@ class GuzzleRequestor
         return $reqOptions;
     }
 
+    /**
+     * Error handler if HTTP request results in error
+     *
+     * @param  array   $errorBody
+     * @param  integer $errorCode
+     */
     private function _handleError(array $errorBody, int $errorCode): void
     {
         [
@@ -78,6 +109,13 @@ class GuzzleRequestor
         throw new DpayRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
     }
     
+    /**
+     * To send HTTP requests to Durianpay APIs
+     *
+     * @param  string $method
+     * @param  string $uri
+     * @param  array  $options
+     */
     public function request(string $method, string $uri, array $options)
     {
         $reqOptions = $this->_processRequestOptions($options);

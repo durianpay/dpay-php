@@ -2,9 +2,21 @@
 
 namespace Durianpay\Http\PresetOperations;
 
+/**
+ * Create Trait
+ * 
+ * @category Trait
+ */
 trait Create
 {
-    public static function create(array $body)
+    /**
+     * A reusable trait function that can be used to create a single data from a designated feature
+     *
+     * @param  array $body
+     *
+     * @return array
+     */
+    public static function create(array $body): array
     {
         $uri = static::getResourceUri();
         $options = ['body' => $body];

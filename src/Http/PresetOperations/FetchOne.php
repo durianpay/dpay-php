@@ -2,9 +2,22 @@
 
 namespace Durianpay\Http\PresetOperations;
 
+/**
+ * FetchOne Trait
+ * 
+ * @category Trait
+ */
 trait FetchOne
 {
-    public static function fetchOne(string $id, array $queryParams = [])
+    /**
+     * A reusable trait function that can be used to retrieve a single data from a designated feature
+     *
+     * @param  string $id
+     * @param  array  $queryParams
+     * 
+     * @return array
+     */
+    public static function fetchOne(string $id, array $queryParams = []): array
     {
         $uri = static::getResourceUri() . '/' . $id;
         $options = ['queryParams' => $queryParams];

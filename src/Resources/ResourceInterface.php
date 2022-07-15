@@ -2,6 +2,11 @@
 
 namespace Durianpay\Resources;
 
+/**
+ * Resource Interface
+ * 
+ * @category Interface
+ */
 interface ResourceInterface
 {
     public static function getResourceUri(): string;

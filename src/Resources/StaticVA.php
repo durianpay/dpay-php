@@ -5,18 +5,35 @@ namespace Durianpay\Resources;
 use Durianpay\Config as Config;
 use Durianpay\Exceptions\EnvironmentException as EnvironmentException;
 
+/**
+ * Static Virtual Account Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/static-virtual-account/overview/
+ */
 class StaticVA implements ResourceInterface
 {
     use \Durianpay\Http\PresetOperations\Create;
     use \Durianpay\Http\PresetOperations\Fetch;
     use \Durianpay\Http\PresetOperations\FetchOne;
 
-
+    /**
+     * Retrieve static virtual account APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'payments/va/static';
     }
 
+    /**
+     * Retrieve required options for a specific static virtual account API 
+     *
+     * @param  string $api
+     *
+     * @return array
+     */
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -43,6 +60,14 @@ class StaticVA implements ResourceInterface
         }
     }
 
+    /**
+     * Update a single static virtual account
+     *
+     * @param  string $id
+     * @param  array  $body
+     *
+     * @return array
+     */
     public static function update(string $id, array $body): array
     {
         $uri = self::getResourceUri() . '/' . $id;
@@ -52,7 +77,14 @@ class StaticVA implements ResourceInterface
         return json_decode($resBody, true);
     }
 
-    public static function simulate($body): array
+    /**
+     * Simulate static virtual account in Sandbox mode
+     *
+     * @param  array $body
+     *
+     * @return array
+     */
+    public static function simulate(array $body): array
     {
         $env = Config::$environment;
         if ($env === 'production') {

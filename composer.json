@@ -13,7 +13,14 @@
             "Durianpay\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Durianpay\\": [
+                "tests/"
+            ]
+        }
+    },
     "require-dev": {
-        "vlucas/phpdotenv": "5.4.x-dev"
+        "phpunit/phpunit": "^9"
     }
 }

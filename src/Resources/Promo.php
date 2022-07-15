@@ -2,6 +2,12 @@
 
 namespace Durianpay\Resources;
 
+/**
+ * Promo Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/promos/overview/
+ */
 class Promo implements ResourceInterface
 {
     use \Durianpay\Http\PresetOperations\Create;
@@ -9,11 +15,23 @@ class Promo implements ResourceInterface
     use \Durianpay\Http\PresetOperations\FetchOne;
     use \Durianpay\Http\PresetOperations\Delete;
 
+    /**
+     * Retrieve promo APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'merchants/promos';
     }
 
+    /**
+     * Retrieve required options for a specific promo API 
+     *
+     * @param  string $api
+     *
+     * @return array
+     */ 
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -40,6 +58,14 @@ class Promo implements ResourceInterface
         }
     }
 
+    /**
+     * Update a single promo object
+     *
+     * @param  string $id
+     * @param  array  $body
+     *
+     * @return array
+     */
     public static function update(string $id, array $body): array
     {
         $uri = self::getResourceUri() . '/' . $id;

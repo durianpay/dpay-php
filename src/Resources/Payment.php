@@ -4,16 +4,34 @@ namespace Durianpay\Resources;
 
 use \Durianpay\Resources\ResourceInterface as ResourceInterface;
 
+/**
+ * Payment Class
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs/api/payments/overview/
+ */
 class Payment implements ResourceInterface
 {
     use \Durianpay\Http\PresetOperations\Fetch;
     use \Durianpay\Http\PresetOperations\FetchOne;
 
+    /**
+     * Retrieve payment APIs' base uri
+     *
+     * @return string
+     */
     public static function getResourceUri(): string
     {
         return 'payments';
     }
 
+    /**
+     * Retrieve required options for a specific payment API 
+     *
+     * @param  string $api
+     *
+     * @return array
+     */ 
     public static function getRequiredOptions(string $api): array
     {
         switch ($api) {
@@ -66,6 +84,14 @@ class Payment implements ResourceInterface
         }
     }
 
+    /**
+     * Create a payment charge call
+     *
+     * @param  string $type
+     * @param  array  $request
+     *
+     * @return array
+     */
     public static function charge(string $type, array $request): array
     {
         $type = strtoupper($type);
@@ -86,6 +112,13 @@ class Payment implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Check the status of a single payment
+     *
+     * @param  string $id
+     *
+     * @return array
+     */
     public static function checkStatus(string $id): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/status';
@@ -93,6 +126,14 @@ class Payment implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Verify a single payment using signature
+     *
+     * @param  string $id
+     * @param  string $verificationSignature
+     *
+     * @return array
+     */
     public static function verify(string $id, string $verificationSignature): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/verify';
@@ -104,6 +145,13 @@ class Payment implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Cancel a single payment charge
+     *
+     * @param  string $id
+     *
+     * @return array
+     */
     public static function cancel(string $id): array
     {
         $uri = self::getResourceUri() . '/' . $id . '/cancel';
@@ -111,6 +159,13 @@ class Payment implements ResourceInterface
         return json_decode($resBody, true);
     }
 
+    /**
+     * Calculate MDR fees
+     *
+     * @param  array $queryParams
+     *
+     * @return array
+     */
     public static function calculateMDRFees(array $queryParams): array
     {
         $uri = 'merchants/mdr_fees';

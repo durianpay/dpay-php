@@ -4,13 +4,33 @@ namespace Durianpay\Http;
 
 use Durianpay\Http\GuzzleRequestor as GuzzleRequestor;
 
+/**
+ * ApiClient Class
+ * 
+ * @category Class
+ */
 class ApiClient
 {
-    public static function sendRequest($method, $uri, $options = []): array
+    /**
+     * Main function to send HTTP requests through Guzzle object
+     *
+     * @param  string $method
+     * @param  string $uri
+     * @param  array  $options
+     *
+     * @return array
+     */
+    public static function sendRequest(string $method, string $uri, $options = []): array
     {
         return GuzzleRequestor::getInstance()->request($method, $uri, $options);
     }
 
+    /**
+     * Validate request options/payload before being sent to the APIs
+     *
+     * @param  array $options
+     * @param  array $requiredOptions
+     */
     public static function validateRequestOptions(array $options, array $requiredOptions)
     {
         if (array_key_exists('body', $options) && array_key_exists('body', $requiredOptions)) {
@@ -42,7 +62,13 @@ class ApiClient
         }
     }
 
-    private static function _isRequestBodyValid($body, $reqBody)
+    /**
+     * To validate POST requests' body object
+     *
+     * @param  array $body
+     * @param  array $reqBody
+     */
+    private static function _isRequestBodyValid(array $body, array $reqBody)
     {
         foreach ($reqBody as $key => $value) {
             if (is_int($key)) {
@@ -59,13 +85,5 @@ class ApiClient
             }
         }
         return true;
-    }
-
-    private static function _isNull($val)
-    {
-        if ($val === null) return true;
-        if (is_int($val)) return ($val === 0);
-        if (is_string($val)) return trim($val) === '';
-        return false;
     }
 }

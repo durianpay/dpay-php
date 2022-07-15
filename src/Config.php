@@ -2,6 +2,12 @@
 
 namespace Durianpay;
 
+/**
+ * Class Config
+ * 
+ * @category Class
+ * @link https://durianpay.id/docs
+ */
 class Config
 {
     public static $defaultCurrency = "IDR";
