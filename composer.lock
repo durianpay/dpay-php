@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c2f3d7a1f35446e6375cb9844a88748",
+    "content-hash": "36507826c05df3fb44d85fda4433d8b4",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -391,12 +391,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "36fa03d50ff82abcae81860bdaf4ed9a1510c7cd"
+                "reference": "5a4f141ac2e5bc35e615134f127e1833158d2944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/36fa03d50ff82abcae81860bdaf4ed9a1510c7cd",
-                "reference": "36fa03d50ff82abcae81860bdaf4ed9a1510c7cd",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/5a4f141ac2e5bc35e615134f127e1833158d2944",
+                "reference": "5a4f141ac2e5bc35e615134f127e1833158d2944",
                 "shasum": ""
             },
             "require": {
@@ -439,7 +439,7 @@
             "support": {
                 "source": "https://github.com/php-fig/http-factory/tree/master"
             },
-            "time": "2020-09-17T16:52:55+00:00"
+            "time": "2022-07-14T07:21:53+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1150,12 +1150,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "53e40236c527413c55828cd7edf2a1188b322ee2"
+                "reference": "f6267f4aaab6cc1c5457ea7be2984828aa93daeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/53e40236c527413c55828cd7edf2a1188b322ee2",
-                "reference": "53e40236c527413c55828cd7edf2a1188b322ee2",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f6267f4aaab6cc1c5457ea7be2984828aa93daeb",
+                "reference": "f6267f4aaab6cc1c5457ea7be2984828aa93daeb",
                 "shasum": ""
             },
             "require": {
@@ -1219,7 +1219,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-13T13:11:30+00:00"
+            "time": "2022-07-16T05:44:48+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1468,12 +1468,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1d2cec6338d9d50f96c3021d1a1072de4dc4be39"
+                "reference": "542bc07713d1823078e864a1742ae34d4be8b335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1d2cec6338d9d50f96c3021d1a1072de4dc4be39",
-                "reference": "1d2cec6338d9d50f96c3021d1a1072de4dc4be39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/542bc07713d1823078e864a1742ae34d4be8b335",
+                "reference": "542bc07713d1823078e864a1742ae34d4be8b335",
                 "shasum": ""
             },
             "require": {
@@ -1562,7 +1562,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-14T05:24:10+00:00"
+            "time": "2022-07-16T05:48:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2643,7 +2643,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": ">=5.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
