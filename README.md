@@ -1,11 +1,9 @@
 # Durianpay-PHP
 Hello fellow developers!
 
----
 ## API Documentations
 For full documentations regarding Durianpay APIs, visit [our docs](https://durianpay.id/docs/api).
 
----
 ## Getting started
 If you already set up `composer` in your project, then type the command below:
 
@@ -13,7 +11,6 @@ If you already set up `composer` in your project, then type the command below:
 composer require durianpay/dpay-php
 ```
 
----
 ## Using the SDK
 Set up the SDK by passing your dashboard **API key** to Durianpay class.
 
@@ -25,7 +22,23 @@ Durianpay::setApiKey('<YOUR_API_KEY>');
 
 To find your API key, go to your dashboard [settings](https://dashboard.durianpay.id/#/settings) and click on **API keys**.
 
----
+## Error Handling
+Our SDK comes with various exception handlers. Whenever you call a function, it is recommended to always wrap it inside a `try-catch` block.
+
+```php
+use Durianpay\Exceptions\RequestException;
+
+try {
+    // Some Durianpay functions
+} catch(RequestException $error) {
+    $errorDesc = $error->getDetailedErrorDesc();
+    
+    echo $error;
+    var_dump($errorDesc);
+}
+```
+
+
 ## Features and Resources
 
 ### Orders
@@ -41,27 +54,27 @@ Pass order details to function.
 Example call:
 ```php
 $res = \Durianpay\Resources\Order::create(
-        [
-            'amount' => '10000',
-            'payment_option' => 'full_payment',
-            'currency' => 'IDR',
-            'order_ref_id' => 'order_ref_001',
-            'customer' => [
-                'customer_ref_id' => 'cust_001',
-                'given_name' => 'Jane Doe',
-                'email' => 'jane_doe@nomail.com',
-                'mobile' => '85722173217',
+    [
+        'amount' => '10000',
+        'payment_option' => 'full_payment',
+        'currency' => 'IDR',
+        'order_ref_id' => 'order_ref_001',
+        'customer' => [
+            'customer_ref_id' => 'cust_001',
+            'given_name' => 'Jane Doe',
+            'email' => 'jane_doe@nomail.com',
+            'mobile' => '85722173217',
+        ],
+        'items' => [
+            [
+                'name' => 'LED Television',
+                'qty' => 1,
+                'price' => '10000',
+                'logo' => 'https://merchant.com/product_001/tv_image.jpg',
             ],
-            'items' => [
-                [
-                    'name' => 'LED Television',
-                    'qty' => 1,
-                    'price' => '10000',
-                    'logo' => 'https://merchant.com/product_001/tv_image.jpg',
-                ],
-            ]
         ]
-    );
+    ]
+);
     
 var_dump($res);
 ```
@@ -76,11 +89,57 @@ Note: Passing `$queryParams` is optional. If `limit` property is not specified i
 Example call:
 ```php
 $res = \Durianpay\Resources\Order::fetch(
-        [
-            'from' => '2021-01-01',
-            'to' => '2022-12-31',
-            'skip' => '0',
-            'limit' => '8'
-        ]
-    );
+    [
+        'from' => '2021-01-01',
+        'to' => '2022-12-31',
+        'skip' => '0',
+        'limit' => '8'
+    ]
+);
+    
+var_dump($res);
+```
+
+##### 3. Fetch a Single Order
+```php
+$res = \Durianpay\Resources\Order:fetchOne($id);
+```
+
+Pass **order id** as an argument to the function.
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::fetchOne('ord_JYF9EqFOiJ8812');
+var_dump($res);
+```
+
+##### 4. Create a Payment Link
+```php
+$res = \Durianpay\Resources\Order:createPaymentLink($body);
+```
+
+Pass order details to function. This function will automatically append property `'is_payment_link' => true` to the request body.
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::createPaymentLink(
+    [
+        'amount' => '10000',
+        'currency' => 'IDR',
+        'customer' => [
+            'given_name' => 'John Doe',
+            'email' => 'john_doe@nomail.com',
+            'mobile' => '01234567890',
+            'given_name' => 'John Doe'
+        ],
+        'items' => [[
+            'name' => 'LED Television',
+            'qty' => 1,
+            'price' => '10000',
+            'logo' => 'https://merchant.com/product_001/tv_image.jpg'
+        ]]
+    ]
+);
+    
+var_dump($res);
 ```
