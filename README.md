@@ -1,5 +1,5 @@
 # Durianpay-PHP
-Hello fellow developers!
+---
 
 ## API Documentations
 For full documentations regarding Durianpay APIs, visit [our docs](https://durianpay.id/docs/api).
@@ -21,23 +21,6 @@ Durianpay::setApiKey('<YOUR_API_KEY>');
 ```
 
 To find your API key, go to your dashboard [settings](https://dashboard.durianpay.id/#/settings) and click on **API keys**.
-
-## Error Handling
-Our SDK comes with various exception handlers. Whenever you call a function, it is recommended to always wrap it inside a `try-catch` block.
-
-```php
-use Durianpay\Exceptions\RequestException;
-
-try {
-    // Some Durianpay functions
-} catch(RequestException $error) {
-    $errorDesc = $error->getDetailedErrorDesc();
-    
-    echo $error;
-    var_dump($errorDesc);
-}
-```
-
 
 ## Features and Resources
 
@@ -84,7 +67,7 @@ var_dump($res);
 $res = \Durianpay\Resources\Order:fetch($queryParams);
 ```
 
-Note: Passing `$queryParams` is optional. If `limit` property is not specified in the `$queryParams`, then the package immediately limits the amount of orders returned to 5.
+Note: Passing `$queryParams` is optional. If `limit` property is not specified in the `$queryParams`, then the SDK immediately limits the amount of orders returned to the **five** latest ones.
 
 Example call:
 ```php
@@ -142,4 +125,122 @@ $res = \Durianpay\Resources\Order::createPaymentLink(
 );
     
 var_dump($res);
+```
+
+---
+### Payments
+For detailed information regarding Payment APIs, visit our [docs](https://durianpay.id/docs/api/payments/overview/).
+
+##### 1. Create Payment Charge
+```php
+$res = \Durianpay\Resources\Payment:charge($type, $request);
+```
+
+Pass order details to function. 
+
+Example call:
+```php
+$type = 'EWALLET'; // EWALLET, VA, RETAILSTORE, ONLINE_BANKING, BNPL, or QRIS
+
+$res = \Durianpay\Resources\Payment::charge($type, [
+    'order_id' => 'ord_xrc0BvcVIF1680',
+    'wallet_type' => 'DANA',
+    'mobile' => '08112165688',
+    'amount' => '15000'
+]);
+    
+var_dump($res);
+```
+
+##### 2. Fetch Payments
+```php
+$res = \Durianpay\Resources\Payment:fetch($queryParams);
+```
+
+Note: Passing `$queryParams` is optional. If `limit` property is not specified in the `$queryParams`, then the SDK immediately limits the amount of payments returned to the **five** latest ones.
+
+Example call:
+```php
+$res = \Durianpay\Resources\Payment::fetch();
+var_dump($res);
+```
+
+##### 3. Fetch a Single Payment
+```php
+$res = \Durianpay\Resources\Payment:fetchOne($id);
+```
+
+Pass **payment id** as an argument to the function.
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::fetchOne('pay_7UnK1zvIjB5787');
+var_dump($res);
+```
+
+##### 4. Check Payment Status
+```php
+$res = \Durianpay\Resources\Payment:checkStatus($id);
+```
+
+The function will return the current state of the payment (completed, processing, cancelled, or failed).
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::checkStatus('pay_7UnK1zvIjB5787');
+var_dump($res);
+```
+
+##### 5. Verify Payments
+```php
+$res = \Durianpay\Resources\Payment:verify($id, $verificationSignature);
+```
+
+Example call:
+```php
+$signature = 'adf9a1a37af514c91225f6680e2df723fefebb7638519bcc7e7c9de02f2a3ab2';
+$res = \Durianpay\Resources\Order::checkStatus('pay_7UnK1zvIjB5787', $signature);
+var_dump($res);
+```
+
+##### 6. Cancel Payment
+```php
+$res = \Durianpay\Resources\Payment:cancel($id);
+```
+
+Will immediately set the payment status to **cancelled**.
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::cancel('pay_7UnK1zvIjB5787');
+var_dump($res);
+```
+
+##### 7. Calculate MDR Fees
+```php
+$res = \Durianpay\Resources\Payment:calculateMDRFees($queryParams);
+```
+
+Example call:
+```php
+$res = \Durianpay\Resources\Order::calculateMDRFees(['amount' => '50000']);
+var_dump($res);
+```
+
+
+
+## Error Handling
+Our SDK comes with various exception handlers. Whenever you call a function, it is recommended to always wrap it inside a `try-catch` block.
+
+```php
+use Durianpay\Exceptions\RequestException;
+
+try {
+    // Some Durianpay functions
+} catch(RequestException $error) {
+    $errorDesc = $error->getDetailedErrorDesc();
+    
+    echo $error;
+    var_dump($errorDesc);
+}
 ```
