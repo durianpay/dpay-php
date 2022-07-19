@@ -27,7 +27,7 @@ To find your API key, go to your dashboard [settings](https://dashboard.durianpa
 ### Orders
 For detailed information regarding Order APIs, visit our [docs](https://durianpay.id/docs/api/orders/overview/).
 
-##### 1. Create Order
+#### 1. Create Order
 ```php
 $res = \Durianpay\Resources\Order:create($body);
 ```
@@ -62,7 +62,7 @@ $res = \Durianpay\Resources\Order::create(
 var_dump($res);
 ```
 
-##### 2. Fetch Orders
+#### 2. Fetch Orders
 ```php
 $res = \Durianpay\Resources\Order:fetch($queryParams);
 ```
@@ -83,7 +83,7 @@ $res = \Durianpay\Resources\Order::fetch(
 var_dump($res);
 ```
 
-##### 3. Fetch a Single Order
+#### 3. Fetch a Single Order
 ```php
 $res = \Durianpay\Resources\Order:fetchOne($id);
 ```
@@ -96,7 +96,7 @@ $res = \Durianpay\Resources\Order::fetchOne('ord_JYF9EqFOiJ8812');
 var_dump($res);
 ```
 
-##### 4. Create a Payment Link
+#### 4. Create a Payment Link
 ```php
 $res = \Durianpay\Resources\Order:createPaymentLink($body);
 ```
@@ -131,7 +131,7 @@ var_dump($res);
 ### Payments
 For detailed information regarding Payment APIs, visit our [docs](https://durianpay.id/docs/api/payments/overview/).
 
-##### 1. Create Payment Charge
+#### 1. Create Payment Charge
 ```php
 $res = \Durianpay\Resources\Payment:charge($type, $request);
 ```
@@ -152,7 +152,7 @@ $res = \Durianpay\Resources\Payment::charge($type, [
 var_dump($res);
 ```
 
-##### 2. Fetch Payments
+#### 2. Fetch Payments
 ```php
 $res = \Durianpay\Resources\Payment:fetch($queryParams);
 ```
@@ -165,7 +165,7 @@ $res = \Durianpay\Resources\Payment::fetch();
 var_dump($res);
 ```
 
-##### 3. Fetch a Single Payment
+#### 3. Fetch a Single Payment
 ```php
 $res = \Durianpay\Resources\Payment:fetchOne($id);
 ```
@@ -178,7 +178,7 @@ $res = \Durianpay\Resources\Order::fetchOne('pay_7UnK1zvIjB5787');
 var_dump($res);
 ```
 
-##### 4. Check Payment Status
+#### 4. Check Payment Status
 ```php
 $res = \Durianpay\Resources\Payment:checkStatus($id);
 ```
@@ -191,7 +191,7 @@ $res = \Durianpay\Resources\Order::checkStatus('pay_7UnK1zvIjB5787');
 var_dump($res);
 ```
 
-##### 5. Verify Payments
+#### 5. Verify Payments
 ```php
 $res = \Durianpay\Resources\Payment:verify($id, $verificationSignature);
 ```
@@ -203,7 +203,7 @@ $res = \Durianpay\Resources\Order::checkStatus('pay_7UnK1zvIjB5787', $signature)
 var_dump($res);
 ```
 
-##### 6. Cancel Payment
+#### 6. Cancel Payment
 ```php
 $res = \Durianpay\Resources\Payment:cancel($id);
 ```
@@ -216,7 +216,7 @@ $res = \Durianpay\Resources\Order::cancel('pay_7UnK1zvIjB5787');
 var_dump($res);
 ```
 
-##### 7. Calculate MDR Fees
+#### 7. Calculate MDR Fees
 ```php
 $res = \Durianpay\Resources\Payment:calculateMDRFees($queryParams);
 ```
