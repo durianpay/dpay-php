@@ -1,17 +1,25 @@
 # Durianpay-PHP
----
 
-## API Documentations
+- [API References](#api-references)
+- [Getting Started](#getting-started)
+- [Initialize the SDK](#initialize-the-sdk)
+- [Features and Resources](#features-and-resources)
+   - [Order](#orders)
+   - [Payment](#payment)
+   - [Order Durianpay Resources](#other-durianpay-resources)
+- [Error Handling](#error-handling)
+
+## API References
 For full documentations regarding Durianpay APIs, visit [our docs](https://durianpay.id/docs/api).
 
-## Getting started
+## Getting Started
 If you already set up `composer` in your project, then type the command below:
 
 ```bash
 composer require durianpay/dpay-php
 ```
 
-## Using the SDK
+## Initialize the SDK
 Set up the SDK by passing your dashboard **API key** to Durianpay class.
 
 ```php
@@ -227,7 +235,9 @@ $res = \Durianpay\Resources\Order::calculateMDRFees(['amount' => '50000']);
 var_dump($res);
 ```
 
-
+---
+### Other Durianpay Resources
+We are continuously expanding this documentation, so stay tune for more features.
 
 ## Error Handling
 Our SDK comes with various exception handlers. Whenever you call a function, it is recommended to always wrap it inside a `try-catch` block.
