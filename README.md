@@ -238,16 +238,17 @@ var_dump($res);
 ---
 ### Other Durianpay Resources
 We are continuously expanding this documentation, so stay tune for more features.
+Meanwhile, you can explore our docs first at https://durianpay.id/docs.
 
 ## Error Handling
 Our SDK comes with various exception handlers. Whenever you call a function, it is recommended to always wrap it inside a `try-catch` block.
 
 ```php
-use Durianpay\Exceptions\RequestException;
+use Durianpay\Exceptions\BadRequestException;
 
 try {
     // Some Durianpay functions
-} catch(RequestException $error) {
+} catch(BadRequestException $error) {
     $errorDesc = $error->getDetailedErrorDesc();
     
     echo $error;
