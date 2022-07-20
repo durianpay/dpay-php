@@ -37,7 +37,7 @@ For detailed information regarding Order APIs, visit our [docs](https://durianpa
 
 #### 1. Create Order
 ```php
-$res = \Durianpay\Resources\Order:create($body);
+$res = \Durianpay\Resources\Order::create($body);
 ```
 
 Pass order details to function. 
@@ -72,7 +72,7 @@ var_dump($res);
 
 #### 2. Fetch Orders
 ```php
-$res = \Durianpay\Resources\Order:fetch($queryParams);
+$res = \Durianpay\Resources\Order::fetch($queryParams);
 ```
 
 Note: Passing `$queryParams` is optional. If `limit` property is not specified in the `$queryParams`, then the SDK immediately limits the amount of orders returned to the **five** latest ones.
@@ -93,7 +93,7 @@ var_dump($res);
 
 #### 3. Fetch a Single Order
 ```php
-$res = \Durianpay\Resources\Order:fetchOne($id);
+$res = \Durianpay\Resources\Order::fetchOne($id);
 ```
 
 Pass **order id** as an argument to the function.
@@ -106,7 +106,7 @@ var_dump($res);
 
 #### 4. Create a Payment Link
 ```php
-$res = \Durianpay\Resources\Order:createPaymentLink($body);
+$res = \Durianpay\Resources\Order::createPaymentLink($body);
 ```
 
 Pass order details to function. This function will automatically append property `'is_payment_link' => true` to the request body.
@@ -141,7 +141,7 @@ For detailed information regarding Payment APIs, visit our [docs](https://durian
 
 #### 1. Create Payment Charge
 ```php
-$res = \Durianpay\Resources\Payment:charge($type, $request);
+$res = \Durianpay\Resources\Payment::charge($type, $request);
 ```
 
 Pass order details to function. 
@@ -162,7 +162,7 @@ var_dump($res);
 
 #### 2. Fetch Payments
 ```php
-$res = \Durianpay\Resources\Payment:fetch($queryParams);
+$res = \Durianpay\Resources\Payment::fetch($queryParams);
 ```
 
 Note: Passing `$queryParams` is optional. If `limit` property is not specified in the `$queryParams`, then the SDK immediately limits the amount of payments returned to the **five** latest ones.
@@ -175,7 +175,7 @@ var_dump($res);
 
 #### 3. Fetch a Single Payment
 ```php
-$res = \Durianpay\Resources\Payment:fetchOne($id);
+$res = \Durianpay\Resources\Payment::fetchOne($id);
 ```
 
 Pass **payment id** as an argument to the function.
@@ -188,7 +188,7 @@ var_dump($res);
 
 #### 4. Check Payment Status
 ```php
-$res = \Durianpay\Resources\Payment:checkStatus($id);
+$res = \Durianpay\Resources\Payment::checkStatus($id);
 ```
 
 The function will return the current state of the payment (completed, processing, cancelled, or failed).
@@ -201,7 +201,7 @@ var_dump($res);
 
 #### 5. Verify Payments
 ```php
-$res = \Durianpay\Resources\Payment:verify($id, $verificationSignature);
+$res = \Durianpay\Resources\Payment::verify($id, $verificationSignature);
 ```
 
 Example call:
@@ -213,7 +213,7 @@ var_dump($res);
 
 #### 6. Cancel Payment
 ```php
-$res = \Durianpay\Resources\Payment:cancel($id);
+$res = \Durianpay\Resources\Payment::cancel($id);
 ```
 
 Will immediately set the payment status to **cancelled**.
@@ -226,7 +226,7 @@ var_dump($res);
 
 #### 7. Calculate MDR Fees
 ```php
-$res = \Durianpay\Resources\Payment:calculateMDRFees($queryParams);
+$res = \Durianpay\Resources\Payment::calculateMDRFees($queryParams);
 ```
 
 Example call:

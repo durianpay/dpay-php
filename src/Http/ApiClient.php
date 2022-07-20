@@ -30,6 +30,8 @@ class ApiClient
      *
      * @param  array $options
      * @param  array $requiredOptions
+     * 
+     * @throws InvalidArgumentException
      */
     public static function validateRequestOptions(array $options, array $requiredOptions)
     {
@@ -76,10 +78,8 @@ class ApiClient
                 $value = null;
             }
 
-            // Check if the required property exists in request body
             if (!array_key_exists($key, $body)) return false;
 
-            // Check if there is subarray that needs to be validated
             if (is_array($value)) {
                 if (self::_isRequestBodyValid($body[$key], $value) === false) return false;
             }
