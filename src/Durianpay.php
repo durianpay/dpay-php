@@ -15,7 +15,7 @@ use Durianpay\Config as Config;
  */
 class Durianpay
 {
-    public static $apiKey;
+    private static $_apiKey;
 
     /**
      * Durianpay class constructor
@@ -24,7 +24,7 @@ class Durianpay
      */
     function __construct($key = "")
     {
-        self::$apiKey = $key;
+        self::$_apiKey = $key;
         self::_setEnvironment();
     }
 
@@ -35,7 +35,7 @@ class Durianpay
      */
     public static function setApiKey(string $key): void
     {
-        self::$apiKey = $key;
+        self::$_apiKey = $key;
         self::_setEnvironment();
     }
 
@@ -46,15 +46,15 @@ class Durianpay
      */
     public static function getApiKey(): string
     {
-        return self::$apiKey;
+        return self::$_apiKey;
     }
 
     /**
      * Set current environment based on API key
      */
     private static function _setEnvironment(): void {
-        if (substr(self::$apiKey, 3, 4) === 'test') Config::$environment = 'sandbox';
-        else if (substr(self::$apiKey, 3, 4) === 'live') Config::$environment = 'production';
-        else Config::$environment = 'production';
+        if (substr(self::$_apiKey, 3, 4) === 'test') Config::$environment = Config::SANDBOX_ENV;
+        else if (substr(self::$_apiKey, 3, 4) === 'live') Config::$environment = Config::PROD_ENV;
+        else Config::$environment = Config::PROD_ENV;
     }
 }

@@ -107,7 +107,7 @@ class Payment implements ResourceInterface
         if ($type === 'RETAILSTORE') $requiredOptions = self::getRequiredOptions('charge-retailstore');
         if ($type === 'ONLINE_BANKING') $requiredOptions = self::getRequiredOptions('charge-onlinebanking');
 
-        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options, $requiredOptions);
+        [$resBody, $resCode, $resHeaders] = \Durianpay\Http\ApiClient::sendRequest('POST', $uri, $options);
 
         return json_decode($resBody, true);
     }

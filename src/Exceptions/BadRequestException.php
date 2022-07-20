@@ -10,7 +10,7 @@ use Throwable;
  * 
  * @category Exception
  */
-class RequestException extends Exception implements Throwable
+class BadRequestException extends Exception implements Throwable
 {
     protected $stateCode;
     protected $desc;
@@ -48,7 +48,7 @@ class RequestException extends Exception implements Throwable
      */
     public function getErrorStateCode(): string
     {
-        return $this->stateCode;
+        return $this->stateCode . "\n";
     }
 
     /**
