@@ -153,7 +153,7 @@ $type = 'EWALLET'; // EWALLET, VA, RETAILSTORE, ONLINE_BANKING, BNPL, or QRIS
 $res = \Durianpay\Resources\Payment::charge($type, [
     'order_id' => 'ord_xrc0BvcVIF1680',
     'wallet_type' => 'DANA',
-    'mobile' => '08112165688',
+    'mobile' => '01234567890',
     'amount' => '15000'
 ]);
     
