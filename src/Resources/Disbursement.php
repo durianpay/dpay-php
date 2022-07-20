@@ -127,10 +127,10 @@ class Disbursement implements ResourceInterface
      *
      * @return array
      */
-    public static function submit(array $body, array $queryParams = [], string $idempotencyKey = ''): array
+    public static function submit(array $body, string $idempotencyKey, array $queryParams = []): array
     {
         $uri = self::getResourceUri() . '/submit';
-        if ($idempotencyKey === '') $idempotencyKey = strval(rand(100000, 1000000) + 1);
+        // if ($idempotencyKey === '') $idempotencyKey = strval(rand(100000, 1000000) + 1);
 
         $options = [
             'body' => $body,

@@ -7,7 +7,7 @@ use GuzzleHttp\RequestOptions as GuzzleRequestOptions;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use Durianpay\Durianpay as Durianpay;
 use Durianpay\Config as Config;
-use Durianpay\Exceptions\RequestException as DpayRequestException;
+use Durianpay\Exceptions\BadRequestException as BadRequestException;
 
 /**
  * GuzzleRequestor Class
@@ -93,6 +93,8 @@ class GuzzleRequestor
      *
      * @param  array   $errorBody
      * @param  integer $errorCode
+     * 
+     * @throws BadRequestException
      */
     private function _handleError(array $errorBody, int $errorCode): void
     {
@@ -106,7 +108,7 @@ class GuzzleRequestor
             $errorDesc = $errorBody['errors'];
         }
 
-        throw new DpayRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
+        throw new BadRequestException($errorMessage, $errorCode, $errorStateCode, $errorDesc);
     }
     
     /**

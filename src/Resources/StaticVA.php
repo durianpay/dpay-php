@@ -83,6 +83,8 @@ class StaticVA implements ResourceInterface
      * @param  array $body
      *
      * @return array
+     * 
+     * @throws EnvironmentException
      */
     public static function simulate(array $body): array
     {
