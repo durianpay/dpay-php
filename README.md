@@ -13,6 +13,8 @@
 For full documentations regarding Durianpay APIs, visit [our docs](https://durianpay.id/docs/api).
 
 ## Getting Started
+Requires PHP 8.2.35+, 8.3.36+, 8.4.27+ or 8.5.12+, the first releases of each branch that fix CVE-2026-109618 and CVE-2026-109619 (PHP2Shell). These also contain the earlier CVE-2026-12184 and CVE-2026-14355 fixes. Composer refuses to install on older PHP; if your distro backports security fixes, use `--ignore-platform-req=php`.
+
 If you already set up `composer` in your project, then type the command below:
 
 ```bash
