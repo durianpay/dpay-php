@@ -7,7 +7,7 @@
     "version": "1.0.0",
     "homepage": "https://github.com/durianpay/dpay-php",
     "require": {
-        "php": "^8.2.32 || ^8.3.32 || ^8.4.23 || ^8.5.8",
+        "php": "^8.2.35 || ^8.3.36 || ^8.4.27 || ^8.5.12",
         "guzzlehttp/guzzle": ">=6.0"
     },
     "require-dev": {
