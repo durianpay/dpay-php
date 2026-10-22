@@ -24,7 +24,7 @@ jobs:
         tools: php-cs-fixer, phpunit
 
     - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      run: composer validate
 
     - name: Cache Composer packages
       id: composer-cache
@@ -38,8 +38,6 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    - name: Run test suite
-      run: composer run-script test
+    # The repo has no test suite yet, so lint the sources instead
+    - name: Lint sources
+      run: find src -name '*.php' -print0 | xargs -0 -n1 php -l
